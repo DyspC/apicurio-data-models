@@ -248,7 +248,9 @@ public abstract class AaiDataModelReader extends DataModelReader {
         // payload
         Object jPayload = JsonCompat.consumeProperty(json, Constants.PROP_PAYLOAD);
         if (jPayload != null) {
-            node.payload = jPayload;
+            AaiSchema value = nodeFactory.createSchemaDefinition(node, null);
+            this.readSchema(jPayload, value);
+            node.payload = value;
         }
         // traits
         List<Object> traits = JsonCompat.consumePropertyArray(json, Constants.PROP_TRAITS);
@@ -325,6 +327,62 @@ public abstract class AaiDataModelReader extends DataModelReader {
         this.readExtensions(json, node);
         this.readExtraProperties(json, node);
     }
+/*
+    public void readSchema(Object json, AaiSchema node) {
+        // String properties
+        node.$ref = JsonCompat.consumePropertyString(json, Constants.PROP_$REF);
+        node.format = JsonCompat.consumePropertyString(json, Constants.PROP_FORMAT);
+        node.title = JsonCompat.consumePropertyString(json, Constants.PROP_TITLE);
+        node.description = JsonCompat.consumePropertyString(json, Constants.PROP_DESCRIPTION);
+        node.pattern = JsonCompat.consumePropertyString(json, Constants.PROP_PATTERN);
+        node.type = JsonCompat.consumePropertyString(json, Constants.PROP_TYPE);
+        node.discriminator = JsonCompat.consumePropertyString(json, Constants.PROP_DISCRIMINATOR);
+        // Number properties
+        node.multipleOf = JsonCompat.consumePropertyNumber(json, Constants.PROP_MULTIPLE_OF);
+        node.maximum = JsonCompat.consumePropertyNumber(json, Constants.PROP_MAXIMUM);
+        node.minimum = JsonCompat.consumePropertyNumber(json, Constants.PROP_MINIMUM);
+        node.maxLength = JsonCompat.consumePropertyNumber(json, Constants.PROP_MAX_LENGTH);
+        node.minLength = JsonCompat.consumePropertyNumber(json, Constants.PROP_MIN_LENGTH);
+        node.maxItems = JsonCompat.consumePropertyNumber(json, Constants.PROP_MAX_ITEMS);
+        node.minItems = JsonCompat.consumePropertyNumber(json, Constants.PROP_MIN_ITEMS);
+        node.maxProperties = JsonCompat.consumePropertyNumber(json, Constants.PROP_MAX_PROPERTIES);
+        node.minProperties = JsonCompat.consumePropertyNumber(json, Constants.PROP_MIN_PROPERTIES);
+        // Boolean properties
+        node.exclusiveMaximum = JsonCompat.consumePropertyBoolean(json, Constants.PROP_EXCLUSIVE_MAXIMUM);
+        node.exclusiveMinimum = JsonCompat.consumePropertyBoolean(json, Constants.PROP_EXCLUSIVE_MINIMUM);
+        node.uniqueItems = JsonCompat.consumePropertyBoolean(json, Constants.PROP_UNIQUE_ITEMS);
+        node.readOnly = JsonCompat.consumePropertyBoolean(json, Constants.PROP_READ_ONLY);
+        node.writeOnly = JsonCompat.consumePropertyBoolean(json, Constants.PROP_WRITE_ONLY);
+        node.deprecated = JsonCompat.consumePropertyBoolean(json, Constants.PROP_DEPRECATED);
+        // Array properties
+        node.required = JsonCompat.consumePropertyStringArray(json, Constants.PROP_REQUIRED);
+        node.enum_ = JsonCompat.consumePropertyArray(json, Constants.PROP_ENUM);
+
+        node.default_ = JsonCompat.consumePropertyObject(json, Constants.PROP_DEFAULT);
+        node.items = JsonCompat.consumePropertyObject(json, Constants.PROP_ITEMS);
+        node.additionalProperties = JsonCompat.consumePropertyObject(json, Constants.PROP_ADDITIONAL_PROPERTIES);
+        node.example = JsonCompat.consumePropertyObject(json, Constants.PROP_EXAMPLE);
+
+        List<Object> allOf = JsonCompat.consumePropertyArray(json, Constants.PROP_ALL_OF);
+        if(allOf != null) {
+            allOf.forEach(j -> {
+                AaiSchema schema = nodeFactory.createSchemaDefinition(node, null);
+                this.readSc(j, schema);
+                node.addTag(tag);
+            });
+        }
+        node.allOf = JsonCompat.consumePropertyArray(json, Constants.PROP_ALL_OF);
+        node.oneOf = JsonCompat.consumePropertyArray(json, Constants.PROP_ONE_OF);
+        node.anyOf = JsonCompat.consumePropertyArray(json, Constants.PROP_ANY_OF);
+        node.not = JsonCompat.consumePropertyObject(json, Constants.PROP_NOT);
+        node.properties = JsonCompat.consumePropertyObject(json, Constants.PROP_PROPERTIES);
+        node.externalDocs = JsonCompat.consumePropertyObject(json, Constants.PROP_EXTERNAL_DOCS);
+
+        this.readExtensions(json, node);
+        this.readExtraProperties(json, node);
+    }
+
+ */
 
     public void readCorrelationId(Object json, AaiCorrelationId node) {
         // String properties
