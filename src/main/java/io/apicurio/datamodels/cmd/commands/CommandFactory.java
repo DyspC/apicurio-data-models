@@ -370,6 +370,8 @@ public class CommandFactory {
             { return new RenameSchemaDefinitionCommand_30(); }
             case "RenameSecuritySchemeCommand":
             { return new RenameSecuritySchemeCommand(); }
+            case "RenameServerCommand_Aai20":
+            { return new RenameServerCommand_Aai20(); }
             case "RenameTagDefinitionCommand":
             { return new RenameTagDefinitionCommand(); }
             case "RenameResponseDefinitionCommand_20":
@@ -931,9 +933,13 @@ public class CommandFactory {
         throw new RuntimeException("Document type not supported by this command.");
     }
 
-    public static final ICommand createRenameSecuritySchemeCommand(String oldSchemeName, 
+    public static final ICommand createRenameSecuritySchemeCommand(String oldSchemeName,
             String newSchemeName) {
         return new RenameSecuritySchemeCommand(oldSchemeName, newSchemeName);
+    }
+
+    public static final ICommand createRenameServerCommand_Aai20(String oldServerName, String newServerName) {
+        return new RenameServerCommand_Aai20(oldServerName, newServerName);
     }
 
     public static final ICommand createRenameTagDefinitionCommand(String oldTag, String newTag) {
