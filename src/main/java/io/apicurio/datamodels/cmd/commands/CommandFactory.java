@@ -363,9 +363,11 @@ public class CommandFactory {
             { return new NewOperationTraitDefinitionCommand(); }
 
             /** Rename Commands **/
-            
+
             case "RenameParameterCommand":
             { return new RenameParameterCommand(); }
+            case "RenameChannelItemCommand":
+            { return new RenameChannelItemCommand(); }
             case "RenamePathItemCommand":
             { return new RenamePathItemCommand(); }
             case "RenamePropertyCommand":
@@ -915,6 +917,10 @@ public class CommandFactory {
     public static final ICommand createRenameParameterCommand(IOasParameterParent parent, 
             String oldParamName, String newParamName, String paramIn) {
         return new RenameParameterCommand(parent, oldParamName, newParamName, paramIn);
+    }
+
+    public static final ICommand createRenameChannelItemCommand(String oldChannelName, String newChannelName) {
+        return new RenameChannelItemCommand(oldChannelName, newChannelName);
     }
     
     public static final ICommand createRenamePathItemCommand(String oldPath, String newPath, 
