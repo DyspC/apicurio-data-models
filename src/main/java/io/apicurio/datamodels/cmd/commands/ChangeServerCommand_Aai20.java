@@ -33,7 +33,6 @@ import io.apicurio.datamodels.core.models.common.Server;
  */
 public class ChangeServerCommand_Aai20 extends AbstractCommand {
 
-    public NodePath _parentPath;
     public String _serverName;
     @JsonDeserialize(using=NullableJsonNodeDeserializer.class)
     public Object _serverObj;
@@ -45,7 +44,6 @@ public class ChangeServerCommand_Aai20 extends AbstractCommand {
     }
 
     ChangeServerCommand_Aai20(AaiServer server) {
-        this._parentPath = Library.createNodePath(server.parent());
         this._serverName = server.getName();
         this._serverObj = Library.writeNode(server);
     }
@@ -58,8 +56,8 @@ public class ChangeServerCommand_Aai20 extends AbstractCommand {
         LoggerCompat.info("[ChangeServerCommand_Aai20] Executing.");
         this._oldServer  = null;
 
-        Aai20Document parent = (Aai20Document) this._parentPath.resolve(document);
-        if (this.isNullOrUndefined(parent)) {
+        Aai20Document parent = (Aai20Document) document;
+        if (this.isNullOrUndefined(parent.servers)) {
             return;
         }
 
@@ -85,8 +83,8 @@ public class ChangeServerCommand_Aai20 extends AbstractCommand {
             return;
         }
 
-        Aai20Document parent = (Aai20Document) this._parentPath.resolve(document);
-        if (this.isNullOrUndefined(parent)) {
+        Aai20Document parent = (Aai20Document) document;
+        if (this.isNullOrUndefined(parent.servers)) {
             return;
         }
 

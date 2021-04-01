@@ -41,7 +41,6 @@ import java.util.Map;
  */
 public class NewServerCommand_Aai20 extends AbstractCommand {
 
-    public NodePath _parentPath;
     @JsonDeserialize(using=NullableJsonNodeDeserializer.class)
     public Object _server;
 
@@ -53,7 +52,6 @@ public class NewServerCommand_Aai20 extends AbstractCommand {
     }
 
     NewServerCommand_Aai20(Aai20Document parent, Aai20Server server) {
-        this._parentPath = Library.createNodePath((Node) parent);
         this._serverName = server.getName();
         this._server = Library.writeNode(server);
     }
@@ -66,9 +64,6 @@ public class NewServerCommand_Aai20 extends AbstractCommand {
         LoggerCompat.info("[NewServerCommand_Aai20] Executing.");
 
         Aai20Document parent = (Aai20Document) document;
-        if (!this.isNullOrUndefined(this._parentPath)) {
-            parent = (Aai20Document) this._parentPath.resolve(document);
-        }
 
         // If the parent doesn't exist, abort!
         if (this.isNullOrUndefined(parent)) {
@@ -104,9 +99,6 @@ public class NewServerCommand_Aai20 extends AbstractCommand {
         }
 
         Aai20Document parent = (Aai20Document) document;
-        if (ModelUtils.isDefined(this._parentPath)) {
-            parent = (Aai20Document) this._parentPath.resolve(document);
-        }
 
         // If the parent doesn't exist, abort!
         if (this.isNullOrUndefined(parent) || this.isNullOrUndefined(parent.servers)) {

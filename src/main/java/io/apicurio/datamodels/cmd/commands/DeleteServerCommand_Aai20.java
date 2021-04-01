@@ -38,7 +38,6 @@ import java.util.Map;
 public class DeleteServerCommand_Aai20 extends AbstractCommand {
 
     public String _serverName;
-    public NodePath _parentPath;
 
     @JsonDeserialize(using=NullableJsonNodeDeserializer.class)
     public Object _oldServer;
@@ -48,7 +47,6 @@ public class DeleteServerCommand_Aai20 extends AbstractCommand {
 
     DeleteServerCommand_Aai20(AaiServer server) {
         this._serverName = server.getName();
-        this._parentPath = Library.createNodePath(server.parent());
     }
 
     /**
@@ -59,8 +57,8 @@ public class DeleteServerCommand_Aai20 extends AbstractCommand {
         LoggerCompat.info("[DeleteServerCommand_Aai20] Executing.");
         this._oldServer = null;
 
-        Aai20Document parent = (Aai20Document) this._parentPath.resolve(document);
-        if (this.isNullOrUndefined(parent)) {
+        Aai20Document parent = (Aai20Document) document;
+        if (this.isNullOrUndefined(parent.servers)) {
             return;
         }
 
@@ -88,7 +86,7 @@ public class DeleteServerCommand_Aai20 extends AbstractCommand {
             return;
         }
 
-        Aai20Document parent = (Aai20Document) this._parentPath.resolve(document);
+        Aai20Document parent = (Aai20Document) document;
         if (this.isNullOrUndefined(parent)) {
             return;
         }

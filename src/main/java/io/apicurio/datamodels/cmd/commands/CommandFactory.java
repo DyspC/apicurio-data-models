@@ -658,8 +658,8 @@ public class CommandFactory {
         return new DeleteAllServersCommand(parent);
     }
 
-    public static final ICommand createDeleteAllServersCommand_Aai20(Aai20Document parent) {
-        return new DeleteAllServersCommand_Aai20(parent);
+    public static final ICommand createDeleteAllServersCommand_Aai20() {
+        return new DeleteAllServersCommand_Aai20();
     }
 
     public static final ICommand createDeleteAllTagsCommand() {
