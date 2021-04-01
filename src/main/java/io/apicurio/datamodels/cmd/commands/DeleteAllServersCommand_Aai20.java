@@ -26,8 +26,6 @@ import io.apicurio.datamodels.compat.MarshallCompat.NullableJsonNodeDeserializer
 import io.apicurio.datamodels.compat.NodeCompat;
 import io.apicurio.datamodels.core.Constants;
 import io.apicurio.datamodels.core.models.Document;
-import io.apicurio.datamodels.core.models.Node;
-import io.apicurio.datamodels.core.models.NodePath;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -61,8 +59,8 @@ public class DeleteAllServersCommand_Aai20 extends AbstractCommand {
         // Save the old servers (if any)
         Map<String, AaiServer> servers = parent.servers;
         if (!this.isNullOrUndefined(servers)) {
-            servers.forEach( (serverName, server) -> {
-                this._oldServers.put(serverName, Library.writeNode(server));
+            servers.keySet().forEach( serverName -> {
+                this._oldServers.put(serverName, Library.writeNode(servers.get(serverName)));
             });
         }
 
@@ -89,9 +87,9 @@ public class DeleteAllServersCommand_Aai20 extends AbstractCommand {
             servers = new LinkedHashMap<>();
             NodeCompat.setProperty(parent, Constants.PROP_SERVERS, servers);
         }
-        this._oldServers.forEach( (serverName, oldServer) -> {
+        this._oldServers.keySet().forEach( serverName -> {
             AaiServer server = parent.createServer(serverName);
-            Library.readNode(oldServer, server);
+            Library.readNode(this._oldServers.get(serverName), server);
             parent.servers.put(serverName, server);
         });
     }
