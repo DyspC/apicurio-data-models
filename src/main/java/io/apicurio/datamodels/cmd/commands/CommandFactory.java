@@ -963,8 +963,11 @@ public class CommandFactory {
         }
     }
 
-    public static final ICommand createRenameServerCommand_Aai20(String oldServerName, String newServerName) {
-        return new RenameServerCommand_Aai20(oldServerName, newServerName);
+    public static final ICommand createRenameServerCommand(DocumentType docType, String oldServerName, String newServerName) {
+        if (docType == DocumentType.asyncapi2) {
+            return new RenameServerCommand_Aai20(oldServerName, newServerName);
+        }
+        throw new RuntimeException("Document type not supported by this command.");
     }
 
     public static final ICommand createRenameTagDefinitionCommand(String oldTag, String newTag) {
