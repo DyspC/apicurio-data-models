@@ -25,6 +25,7 @@ import io.apicurio.datamodels.core.models.Document;
 import io.apicurio.datamodels.core.models.common.SecurityScheme;
 
 /**
+ * A command used to create a new security scheme in an aaidocument.
  * @author c.desc2@gmail.com
  */
 public class NewSecuritySchemeCommand_Aai20 extends NewSecuritySchemeCommand {

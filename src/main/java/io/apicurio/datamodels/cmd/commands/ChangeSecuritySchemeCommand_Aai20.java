@@ -22,6 +22,7 @@ import io.apicurio.datamodels.core.models.Document;
 import io.apicurio.datamodels.core.models.common.SecurityScheme;
 
 /**
+ * A command used to change a security scheme in an aaidocument.
  * @author c.desc2@gmail.com
  */
 public class ChangeSecuritySchemeCommand_Aai20 extends ChangeSecuritySchemeCommand {

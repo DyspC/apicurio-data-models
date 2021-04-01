@@ -25,7 +25,7 @@ import io.apicurio.datamodels.core.models.Document;
 
 /**
  * A command used to rename a security scheme, along with all references to it.
- * @author eric.wittmann@gmail.com
+ * @author c.desc2@gmail.com
  */
 public class RenameServerCommand_Aai20 extends AbstractCommand {
 

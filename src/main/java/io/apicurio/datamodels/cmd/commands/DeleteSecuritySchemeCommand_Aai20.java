@@ -24,6 +24,7 @@ import io.apicurio.datamodels.cmd.util.ModelUtils;
 import io.apicurio.datamodels.core.models.Document;
 
 /**
+ * A command used to delete a security scheme from an aaidocument.
  * @author c.desc2@gmail.com
  */
 public class DeleteSecuritySchemeCommand_Aai20 extends DeleteSecuritySchemeCommand {
