@@ -159,6 +159,8 @@ public class CommandFactory {
             { return new ChangeSecuritySchemeCommand_20(); }
             case "ChangeSecuritySchemeCommand_30":
             { return new ChangeSecuritySchemeCommand_30(); }
+            case "ChangeSecuritySchemeCommand_Aai20":
+            { return new ChangeSecuritySchemeCommand_Aai20(); }
             case "ChangeServerCommand":
             { return new ChangeServerCommand(); }
             case "ChangeServerCommand_Aai20":
@@ -266,6 +268,8 @@ public class CommandFactory {
             { return new DeleteSecuritySchemeCommand_20(); }
             case "DeleteSecuritySchemeCommand_30":
             { return new DeleteSecuritySchemeCommand_30(); }
+            case "DeleteSecuritySchemeCommand_Aai20":
+            { return new DeleteSecuritySchemeCommand_Aai20(); }
             case "DeleteServerCommand":
             { return new DeleteServerCommand(); }
             case "DeleteServerCommand_Aai20":
@@ -327,6 +331,8 @@ public class CommandFactory {
             { return new NewSecuritySchemeCommand_20(); }
             case "NewSecuritySchemeCommand_30":
             { return new NewSecuritySchemeCommand_30(); }
+            case "NewSecuritySchemeCommand_Aai20":
+            { return new NewSecuritySchemeCommand_Aai20(); }
             case "NewServerCommand":
             { return new NewServerCommand(); }
             case "NewServerCommand_Aai20":
@@ -370,6 +376,8 @@ public class CommandFactory {
             { return new RenameSchemaDefinitionCommand_30(); }
             case "RenameSecuritySchemeCommand":
             { return new RenameSecuritySchemeCommand(); }
+            case "RenameSecuritySchemeCommand_Aai20":
+            { return new RenameSecuritySchemeCommand_Aai20(); }
             case "RenameServerCommand_Aai20":
             { return new RenameServerCommand_Aai20(); }
             case "RenameTagDefinitionCommand":
@@ -573,6 +581,8 @@ public class CommandFactory {
             return new ChangeSecuritySchemeCommand_20(scheme);
         } else if (docType == DocumentType.openapi3) {
             return new ChangeSecuritySchemeCommand_30(scheme);
+        } else if (docType == DocumentType.asyncapi2) {
+            return new ChangeSecuritySchemeCommand_Aai20(scheme);
         }
         throw new RuntimeException("Document type not supported by this command.");
     }
@@ -749,6 +759,9 @@ public class CommandFactory {
         if (docType == DocumentType.openapi3) {
             return new DeleteSecuritySchemeCommand_30(schemeName);
         }
+        if (docType == DocumentType.asyncapi2) {
+            return new DeleteSecuritySchemeCommand_Aai20(schemeName);
+        }
         throw new RuntimeException("Document type not supported by this command.");
     }
 
@@ -859,6 +872,9 @@ public class CommandFactory {
         if (docType == DocumentType.openapi3) {
             return new NewSecuritySchemeCommand_30(scheme);
         }
+        if (docType == DocumentType.asyncapi2) {
+            return new NewSecuritySchemeCommand_Aai20(scheme);
+        }
         throw new RuntimeException("Document type not supported by this command.");
     }
 
@@ -933,9 +949,18 @@ public class CommandFactory {
         throw new RuntimeException("Document type not supported by this command.");
     }
 
+    @Deprecated
     public static final ICommand createRenameSecuritySchemeCommand(String oldSchemeName,
             String newSchemeName) {
         return new RenameSecuritySchemeCommand(oldSchemeName, newSchemeName);
+    }
+
+    public static final ICommand createRenameSecuritySchemeCommand(DocumentType docType, String oldSchemeName, String newSchemeName) {
+        if (docType == DocumentType.asyncapi2) {
+            return new RenameSecuritySchemeCommand_Aai20(oldSchemeName, newSchemeName);
+        } else {
+            return new RenameSecuritySchemeCommand(oldSchemeName, newSchemeName);
+        }
     }
 
     public static final ICommand createRenameServerCommand_Aai20(String oldServerName, String newServerName) {
